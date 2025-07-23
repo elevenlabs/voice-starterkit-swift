@@ -1,4 +1,5 @@
-<img src="./.github/assets/app-icon.png" alt="Voice Agent App Icon" width="100" height="100">
+
+![starter kit](https://github.com/user-attachments/assets/9dd5260e-2fc8-44f5-9720-feb7919ec05a)
 
 # ElevenLabs Swift Voice Starter Kit
 
