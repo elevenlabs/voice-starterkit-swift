@@ -88,7 +88,7 @@ struct ControlBar: View {
             }
             #if os(macOS)
             separator()
-            AudioDeviceSelector()
+            AudioDeviceSelector(viewModel: viewModel)
                 .frame(height: Constants.buttonHeight)
             #endif
             Spacer()

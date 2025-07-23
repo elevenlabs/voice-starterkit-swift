@@ -171,12 +171,6 @@ final class AppViewModel: ObservableObject {
         // Audio device selection handled by ElevenLabs SDK internally
         // This method kept for UI compatibility
     }
-
-    func select(videoDevice: AVCaptureDevice) async {
-        selectedVideoDeviceID = videoDevice.uniqueID
-        // Video device selection not directly supported in ElevenLabs SDK
-        // TODO: Implement if needed for your use case
-    }
     #endif
 
     func switchCamera() async {
