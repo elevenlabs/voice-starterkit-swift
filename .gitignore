@@ -5,6 +5,8 @@
 # Environment variables
 **/.env.xcconfig
 
+.claude/
+
 ## User settings
 xcuserdata/
 

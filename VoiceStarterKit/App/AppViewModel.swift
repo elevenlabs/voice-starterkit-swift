@@ -8,10 +8,9 @@ import Observation
 
 @MainActor
 final class AppViewModel: ObservableObject {
-    // REPLACE WITH YOUR AGENT ID
     // MARK: - Constants
     private enum Constants {
-        static let publicAgentId: String = "agent_01k0s2sk11fgfvdhehvj2xn0p5"
+        static let publicAgentId: String = "REPLACE_WITH_YOUR_PUBLIC_AGENT_ID"
     }
     
 

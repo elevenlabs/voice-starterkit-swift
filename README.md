@@ -10,6 +10,10 @@ This template is compatible with iOS, iPadOS, macOS, and visionOS and is free fo
 
 First, create a new public [Conversational AI agent](https://elevenlabs.io/app/conversational-ai).
 
+Replace `publicAgentId` in `AppViewModel.swift` with your public agent id.
+
+Note: Be sure to enable the user transcript and agent response client events.
+
 Built and run the app from Xcode by opening `VoiceStarterKit.xcodeproj`. You may need to adjust your app signing settings to run the app on your device.
 
 ## Token generation
