@@ -136,6 +136,6 @@ struct ControlBar: View {
 }
 
 #Preview {
-    @State var interactionMode: AppViewModel.InteractionMode = .voice
+    @Previewable @State var interactionMode: AppViewModel.InteractionMode = .voice
     ControlBar(viewModel: AppViewModel(), interactionMode: $interactionMode)
 }

@@ -18,7 +18,7 @@ final class AppViewModel: ObservableObject {
     // MARK: - Constants
 
     private enum Constants {
-        static let publicAgentId: String = "agent_01k0s2sk11fgfvdhehvj2xn0p5"
+        static let publicAgentId: String = "insert_your_agent_id_here"
     }
 
     // MARK: - Modes
