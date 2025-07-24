@@ -31,6 +31,20 @@ struct AppView: View {
             .alert(error?.localizedDescription ?? "error.title", isPresented: .constant(error != nil)) {
                 Button("error.ok") { error = nil }
             }
+            .alert(viewModel.currentAlert?.title ?? "Alert", isPresented: .constant(viewModel.currentAlert != nil)) {
+                Button("Accept") {
+                    Task {
+                        await viewModel.respondToAlert(accepted: true)
+                    }
+                }
+                Button("Decline", role: .cancel) {
+                    Task {
+                        await viewModel.respondToAlert(accepted: false)
+                    }
+                }
+            } message: {
+                Text(viewModel.currentAlert?.message ?? "")
+            }
         #else
             .safeAreaInset(edge: .bottom) {
                 if viewModel.isInteractive, !keyboardFocus {
@@ -49,6 +63,20 @@ struct AppView: View {
         #if os(iOS)
             .sensoryFeedback(.impact, trigger: viewModel.isListening)
         #endif
+            .alert(viewModel.currentAlert?.title ?? "Alert", isPresented: .constant(viewModel.currentAlert != nil)) {
+                Button("Accept") {
+                    Task {
+                        await viewModel.respondToAlert(accepted: true)
+                    }
+                }
+                Button("Decline", role: .cancel) {
+                    Task {
+                        await viewModel.respondToAlert(accepted: false)
+                    }
+                }
+            } message: {
+                Text(viewModel.currentAlert?.message ?? "")
+            }
     }
 
     @ViewBuilder

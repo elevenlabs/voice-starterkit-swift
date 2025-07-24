@@ -6,11 +6,18 @@ import Observation
 
 // Use ElevenLabs Message type directly
 
+struct AlertInfo: Identifiable {
+    let id = UUID()
+    let title: String
+    let message: String
+    let toolCallId: String
+}
+
 @MainActor
 final class AppViewModel: ObservableObject {
     // MARK: - Constants
     private enum Constants {
-        static let publicAgentId: String = "REPLACE_WITH_YOUR_PUBLIC_AGENT_ID"
+        static let publicAgentId: String = "agent_01k0s2sk11fgfvdhehvj2xn0p5"
     }
     
 
@@ -27,6 +34,9 @@ final class AppViewModel: ObservableObject {
 
     private(set) var conversation: Conversation?
     private var cancellables = Set<AnyCancellable>()
+    
+    // Alert tool state
+    @Published var currentAlert: AlertInfo?
     
     // Map ElevenLabs conversation state to UI-friendly properties
     var connectionState: ConnectionState {
@@ -122,6 +132,15 @@ final class AppViewModel: ObservableObject {
             newConversation.$isMuted.sink { [weak self] _ in
                 self?.objectWillChange.send()
             }.store(in: &cancellables)
+            
+            newConversation.$pendingToolCalls.sink { [weak self] toolCalls in
+                for toolCall in toolCalls {
+                    print("Received client tool call: \(toolCall.toolName) (ID: \(toolCall.toolCallId))")
+                    Task {
+                        await self?.handleToolCall(toolCall)
+                    }
+                }
+            }.store(in: &cancellables)
         } catch {
             errorHandler(error)
             resetState()
@@ -176,5 +195,61 @@ final class AppViewModel: ObservableObject {
     func switchCamera() async {
         // Camera switching not directly supported in ElevenLabs SDK
         // TODO: Implement if needed for your use case
+    }
+    
+    // MARK: - Example Client Tool Call Handling with user response expected
+    /// This is an example of how to handle tool calls, a client tool called `alert_tool` must be added to the agent. This tool must expect a response.
+    private func handleToolCall(_ toolCall: ClientToolCallEvent) async {
+        do {
+            let parameters = try toolCall.getParameters()
+            
+            switch toolCall.toolName {
+            case "alert_tool":
+                await handleAlertTool(toolCall: toolCall, parameters: parameters)
+            default:
+                // Handle unknown tools
+                if toolCall.expectsResponse {
+                    try await conversation?.sendToolResult(
+                        for: toolCall.toolCallId,
+                        result: "Unknown tool: \(toolCall.toolName)",
+                        isError: true
+                    )
+                }
+            }
+        } catch {
+            if toolCall.expectsResponse {
+                try? await conversation?.sendToolResult(
+                    for: toolCall.toolCallId,
+                    result: error.localizedDescription,
+                    isError: true
+                )
+            }
+        }
+    }
+    
+    private func handleAlertTool(toolCall: ClientToolCallEvent, parameters: [String: Any]) async {
+        let title = parameters["title"] as? String ?? "Alert"
+        let message = parameters["message"] as? String ?? ""
+        
+        currentAlert = AlertInfo(
+            title: title,
+            message: message,
+            toolCallId: toolCall.toolCallId
+        )
+    }
+    
+    func respondToAlert(accepted: Bool) async {
+        guard let alert = currentAlert else { return }
+        
+        do {
+            try await conversation?.sendToolResult(
+                for: alert.toolCallId,
+                result: accepted ? "User clicked Accept" : "User clicked Decline"
+            )
+        } catch {
+            errorHandler(error)
+        }
+        
+        currentAlert = nil
     }
 }
