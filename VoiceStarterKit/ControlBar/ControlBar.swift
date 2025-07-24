@@ -6,7 +6,7 @@ import ElevenLabsComponents
 struct ControlBar: View {
     @ObservedObject var viewModel: AppViewModel
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    
+
     @Binding var interactionMode: AppViewModel.InteractionMode
 
     private enum Constants {
@@ -112,7 +112,7 @@ struct ControlBar: View {
         )
         .disabled(!viewModel.isInteractive)
     }
-    
+
     private func toggleTextInput() {
         // Toggle interaction mode immediately for responsive UI
         interactionMode = interactionMode == .text ? .voice : .text

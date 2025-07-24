@@ -24,7 +24,7 @@ struct StartView: View {
     @ViewBuilder
     private func bars() -> some View {
         HStack(spacing: .grid * 2) {
-            ForEach(0 ..< 2, id: \.self) { index in
+            ForEach(0 ..< 2, id: \.self) { _ in
                 Rectangle()
                     .fill(.fg0)
                     .frame(width: 14, height: 60)

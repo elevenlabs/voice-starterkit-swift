@@ -122,8 +122,7 @@ struct AppView: View {
     @ViewBuilder
     private func agentListening() -> some View {
         ZStack {
-            if viewModel.messages.isEmpty
-            {
+            if viewModel.messages.isEmpty {
                 AgentListeningView()
             }
         }

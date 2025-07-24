@@ -14,14 +14,14 @@ struct AgentParticipantView: View {
         ZStack {
             if let agentAudioTrack = viewModel.agentAudioTrack {
                 OrbVisualizer(inputTrack: agentAudioTrack,
-                             outputTrack: agentAudioTrack,
-                             agentState: viewModel.conversation?.agentState ?? .listening)
+                              outputTrack: agentAudioTrack,
+                              agentState: viewModel.conversation?.agentState ?? .listening)
                     .frame(maxWidth: 50 * .grid, maxHeight: 50 * .grid)
                     .transition(.opacity)
             } else if viewModel.isInteractive {
                 OrbVisualizer(inputTrack: nil,
-                             outputTrack: nil,
-                             agentState: .listening)
+                              outputTrack: nil,
+                              agentState: .listening)
                     .frame(maxWidth: 48 * .grid, maxHeight: 48 * .grid)
                     .transition(.opacity)
             }

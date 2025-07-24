@@ -16,10 +16,10 @@ struct AlertInfo: Identifiable {
 @MainActor
 final class AppViewModel: ObservableObject {
     // MARK: - Constants
+
     private enum Constants {
         static let publicAgentId: String = "agent_01k0s2sk11fgfvdhehvj2xn0p5"
     }
-    
 
     // MARK: - Modes
 
@@ -34,10 +34,10 @@ final class AppViewModel: ObservableObject {
 
     private(set) var conversation: Conversation?
     private var cancellables = Set<AnyCancellable>()
-    
+
     // Alert tool state
     @Published var currentAlert: AlertInfo?
-    
+
     // Map ElevenLabs conversation state to UI-friendly properties
     var connectionState: ConnectionState {
         guard let conversation else { return .disconnected }
@@ -49,13 +49,13 @@ final class AppViewModel: ObservableObject {
         case .error: return .disconnected
         }
     }
-    
+
     var isListening: Bool {
         conversation?.agentState == .listening
     }
-    
+
     var isInteractive: Bool {
-        guard let conversation = conversation else { return false }
+        guard let conversation else { return false }
         switch conversation.state {
         case .active: return true
         default: return false
@@ -63,7 +63,7 @@ final class AppViewModel: ObservableObject {
     }
 
     private(set) var interactionMode: InteractionMode = .voice
-    
+
     // Messages from conversation
     var messages: [Message] {
         conversation?.messages ?? []
@@ -74,11 +74,11 @@ final class AppViewModel: ObservableObject {
     var isMicrophoneEnabled: Bool {
         !(conversation?.isMuted ?? true)
     }
-    
+
     var audioTrack: LocalAudioTrack? {
         conversation?.inputTrack
     }
-    
+
     var agentAudioTrack: RemoteAudioTrack? {
         conversation?.agentAudioTrack
     }
@@ -88,7 +88,7 @@ final class AppViewModel: ObservableObject {
     var audioDevices: [AudioDevice] {
         conversation?.audioDevices ?? []
     }
-    
+
     var selectedAudioDeviceID: String {
         conversation?.selectedAudioDeviceID ?? ""
     }
@@ -115,24 +115,24 @@ final class AppViewModel: ObservableObject {
         do {
             let newConversation = try await ElevenLabs.startConversation(agentId: Constants.publicAgentId)
             conversation = newConversation
-            
+
             // Observe specific conversation changes for immediate UI updates
             newConversation.$state.sink { [weak self] _ in
                 self?.objectWillChange.send()
             }.store(in: &cancellables)
-            
+
             newConversation.$messages.sink { [weak self] _ in
                 self?.objectWillChange.send()
             }.store(in: &cancellables)
-            
+
             newConversation.$agentState.sink { [weak self] _ in
                 self?.objectWillChange.send()
             }.store(in: &cancellables)
-            
+
             newConversation.$isMuted.sink { [weak self] _ in
                 self?.objectWillChange.send()
             }.store(in: &cancellables)
-            
+
             newConversation.$pendingToolCalls.sink { [weak self] toolCalls in
                 for toolCall in toolCalls {
                     print("Received client tool call: \(toolCall.toolName) (ID: \(toolCall.toolCallId))")
@@ -147,15 +147,11 @@ final class AppViewModel: ObservableObject {
         }
     }
 
-
-
-
     func disconnect() async {
         await conversation?.endConversation()
         conversation = nil
         resetState()
     }
-
 
     // MARK: - Actions
 
@@ -167,7 +163,7 @@ final class AppViewModel: ObservableObject {
             interactionMode = .voice
         }
     }
-    
+
     func sendMessage(_ text: String) async {
         do {
             try await conversation?.sendMessage(text)
@@ -184,9 +180,8 @@ final class AppViewModel: ObservableObject {
         }
     }
 
-
     #if os(macOS)
-    func select(audioDevice: AudioDevice) {
+    func select(audioDevice _: AudioDevice) {
         // Audio device selection handled by ElevenLabs SDK internally
         // This method kept for UI compatibility
     }
@@ -196,13 +191,14 @@ final class AppViewModel: ObservableObject {
         // Camera switching not directly supported in ElevenLabs SDK
         // TODO: Implement if needed for your use case
     }
-    
+
     // MARK: - Example Client Tool Call Handling with user response expected
+
     /// This is an example of how to handle tool calls, a client tool called `alert_tool` must be added to the agent. This tool must expect a response.
     private func handleToolCall(_ toolCall: ClientToolCallEvent) async {
         do {
             let parameters = try toolCall.getParameters()
-            
+
             switch toolCall.toolName {
             case "alert_tool":
                 await handleAlertTool(toolCall: toolCall, parameters: parameters)
@@ -226,21 +222,21 @@ final class AppViewModel: ObservableObject {
             }
         }
     }
-    
+
     private func handleAlertTool(toolCall: ClientToolCallEvent, parameters: [String: Any]) async {
         let title = parameters["title"] as? String ?? "Alert"
         let message = parameters["message"] as? String ?? ""
-        
+
         currentAlert = AlertInfo(
             title: title,
             message: message,
             toolCallId: toolCall.toolCallId
         )
     }
-    
+
     func respondToAlert(accepted: Bool) async {
         guard let alert = currentAlert else { return }
-        
+
         do {
             try await conversation?.sendToolResult(
                 for: alert.toolCallId,
@@ -249,7 +245,7 @@ final class AppViewModel: ObservableObject {
         } catch {
             errorHandler(error)
         }
-        
+
         currentAlert = nil
     }
 }
