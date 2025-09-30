@@ -203,23 +203,19 @@ final class AppViewModel: ObservableObject {
             case "alert_tool":
                 await handleAlertTool(toolCall: toolCall, parameters: parameters)
             default:
-                // Handle unknown tools
-                if toolCall.expectsResponse {
-                    try await conversation?.sendToolResult(
-                        for: toolCall.toolCallId,
-                        result: "Unknown tool: \(toolCall.toolName)",
-                        isError: true
-                    )
-                }
-            }
-        } catch {
-            if toolCall.expectsResponse {
-                try? await conversation?.sendToolResult(
+                try await conversation?.sendToolResult(
                     for: toolCall.toolCallId,
-                    result: error.localizedDescription,
+                    result: "Unknown tool: \(toolCall.toolName)",
                     isError: true
                 )
+                
             }
+        } catch {
+            try? await conversation?.sendToolResult(
+                for: toolCall.toolCallId,
+                result: error.localizedDescription,
+                isError: true
+            )
         }
     }
 

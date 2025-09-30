@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "Accept" : {
+
+    },
     "agent.listening" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -44,6 +47,9 @@
           }
         }
       }
+    },
+    "Decline" : {
+
     },
     "error.ok" : {
       "localizations" : {
