@@ -208,7 +208,6 @@ final class AppViewModel: ObservableObject {
                     result: "Unknown tool: \(toolCall.toolName)",
                     isError: true
                 )
-                
             }
         } catch {
             try? await conversation?.sendToolResult(
