@@ -58,7 +58,10 @@ struct AppView: View {
             .animation(.default, value: interactionMode)
             .animation(.default, value: error?.localizedDescription)
             .onAppear {
-                Dependencies.shared.errorHandler = { error = $0 }
+                Dependencies.shared.errorHandler = {
+                    error = $0
+                    if let error { viewModel.log("SDK error: \(error.localizedDescription)") }
+                }
             }
         #if os(iOS)
             .sensoryFeedback(.impact, trigger: viewModel.isListening)

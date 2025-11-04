@@ -1,5 +1,5 @@
 {
-  "originHash" : "48566baa2a5ed3f96188c135dcdcb0ed65deecbf85c4e9d55cbd1f585f004b7b",
+  "originHash" : "6070ad9acf9609f4028c5dade19d0b105038748a6be34e34d1e2b4cf421b0100",
   "pins" : [
     {
       "identity" : "client-sdk-swift",
@@ -24,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elevenlabs/elevenlabs-swift-sdk.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "08fdb9b674a8823677cc61f1552be56798336038"
+        "revision" : "a2cf46ac187c322ce6361cc0e7116d12096c1e48",
+        "version" : "2.1.0-alpha.1"
       }
     },
     {
