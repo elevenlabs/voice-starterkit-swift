@@ -32,7 +32,7 @@ struct ChatView: View {
             case .user:
                 userTranscript(message.content)
             case .agent:
-                agentTranscript(message.content)
+                agentTranscript(message)
             }
         }
         .upsideDown()
@@ -58,11 +58,27 @@ struct ChatView: View {
     }
 
     @ViewBuilder
-    private func agentTranscript(_ text: String) -> some View {
-        HStack {
-            Text(text.trimmingCharacters(in: .whitespacesAndNewlines))
-                .font(.system(size: 17))
+    private func agentTranscript(_ message: Message) -> some View {
+        let text = message.content.trimmingCharacters(in: .whitespacesAndNewlines)
+        let highlightedCount = min(viewModel.highlightedCharacterCount(for: message), text.count)
+        let highlightIndex = text.index(text.startIndex, offsetBy: highlightedCount, limitedBy: text.endIndex) ?? text.endIndex
+        let highlighted = String(text[..<highlightIndex])
+        let remainder = String(text[highlightIndex...])
+        let highlightedText = Text(highlighted)
+            .foregroundColor(.accentColor)
+            .font(.system(size: 17, weight: .semibold))
+        let remainderText = Text(remainder)
+            .foregroundStyle(.fg1)
+            .font(.system(size: 17))
+
+        HStack(alignment: .top) {
+            // Build the concatenated Text first to satisfy the `+` operator requirements
+            let leading: Text = highlighted.isEmpty ? Text("") : Text(highlighted)
+            let combined: Text = leading.foregroundStyle(.fgAccent).font(.system(size: 17, weight: .semibold)) + Text(remainder).foregroundStyle(.fg1).font(.system(size: 17))
+
+            combined
                 .padding(.vertical, 2 * .grid)
+
             Spacer(minLength: 4 * .grid)
         }
     }

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		917276422E31513700A841FF /* ElevenLabs in Frameworks */ = {isa = PBXBuildFile; productRef = 917276412E31513700A841FF /* ElevenLabs */; };
 		9182EB872E317E1400C7B06A /* ElevenLabsComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 9182EB862E317E1400C7B06A /* ElevenLabsComponents */; };
+		91FF89242EBA93EC0044C3D5 /* ElevenLabs in Frameworks */ = {isa = PBXBuildFile; productRef = 91FF89232EBA93EC0044C3D5 /* ElevenLabs */; };
 		ACAEBA5B2DE6EE970072E93E /* ReplayKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACAEBA5A2DE6EE970072E93E /* ReplayKit.framework */; };
 		ACAEBA622DE6EE970072E93E /* BroadcastExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ACAEBA582DE6EE970072E93E /* BroadcastExtension.appex */; platformFilters = (ios, xros, ); settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ACAEBA692DE6EF4B0072E93E /* LiveKit in Frameworks */ = {isa = PBXBuildFile; productRef = ACAEBA682DE6EF4B0072E93E /* LiveKit */; };
@@ -119,8 +119,8 @@
 			files = (
 				ACFBA1DB2D8D5CBE0021202B /* Collections in Frameworks */,
 				ACBC177A2D8C34B5007EE71F /* AsyncAlgorithms in Frameworks */,
-				917276422E31513700A841FF /* ElevenLabs in Frameworks */,
 				9182EB872E317E1400C7B06A /* ElevenLabsComponents in Frameworks */,
+				91FF89242EBA93EC0044C3D5 /* ElevenLabs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,8 +226,8 @@
 			packageProductDependencies = (
 				ACBC17792D8C34B5007EE71F /* AsyncAlgorithms */,
 				ACFBA1DA2D8D5CBE0021202B /* Collections */,
-				917276412E31513700A841FF /* ElevenLabs */,
 				9182EB862E317E1400C7B06A /* ElevenLabsComponents */,
+				91FF89232EBA93EC0044C3D5 /* ElevenLabs */,
 			);
 			productName = VoiceStarterKit;
 			productReference = B5B5E3B22D124AE00099C9BE /* VoiceStarterKit.app */;
@@ -267,8 +267,8 @@
 			packageReferences = (
 				ACBC17782D8C34B5007EE71F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
 				ACFBA1D92D8D5CBE0021202B /* XCRemoteSwiftPackageReference "swift-collections" */,
-				917276402E31513700A841FF /* XCRemoteSwiftPackageReference "elevenlabs-swift-sdk" */,
 				9182EB852E317E1400C7B06A /* XCRemoteSwiftPackageReference "components-swift" */,
+				91FF89222EBA93EC0044C3D5 /* XCRemoteSwiftPackageReference "elevenlabs-swift-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = B5B5E3B32D124AE00099C9BE /* Products */;
@@ -353,7 +353,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = BroadcastExtension/BroadcastExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 76TVFCUKK7;
+				DEVELOPMENT_TEAM = UKQH7F8SBR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BroadcastExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VoiceStarterKit;
@@ -365,7 +365,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.elevenlabs.example.VoiceStarterKit.broadcast;
+				PRODUCT_BUNDLE_IDENTIFIER = io.elevenlabs.example.VoiceStarterKit1.broadcast;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -385,7 +385,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = BroadcastExtension/BroadcastExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 76TVFCUKK7;
+				DEVELOPMENT_TEAM = UKQH7F8SBR;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BroadcastExtension/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VoiceStarterKit;
@@ -623,7 +623,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.elevenlabs.example.VoiceStarterKit;
+				PRODUCT_BUNDLE_IDENTIFIER = io.elevenlabs.example.VoiceStarterKit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -670,7 +670,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.elevenlabs.example.VoiceStarterKit;
+				PRODUCT_BUNDLE_IDENTIFIER = io.elevenlabs.example.VoiceStarterKit1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -723,20 +723,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		917276402E31513700A841FF /* XCRemoteSwiftPackageReference "elevenlabs-swift-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elevenlabs/elevenlabs-swift-sdk.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		9182EB852E317E1400C7B06A /* XCRemoteSwiftPackageReference "components-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elevenlabs/components-swift.git";
 			requirement = {
 				branch = main;
 				kind = branch;
+			};
+		};
+		91FF89222EBA93EC0044C3D5 /* XCRemoteSwiftPackageReference "elevenlabs-swift-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elevenlabs/elevenlabs-swift-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = "2.1.0-alpha.2";
 			};
 		};
 		ACBC17782D8C34B5007EE71F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */ = {
@@ -758,15 +758,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		917276412E31513700A841FF /* ElevenLabs */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 917276402E31513700A841FF /* XCRemoteSwiftPackageReference "elevenlabs-swift-sdk" */;
-			productName = ElevenLabs;
-		};
 		9182EB862E317E1400C7B06A /* ElevenLabsComponents */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9182EB852E317E1400C7B06A /* XCRemoteSwiftPackageReference "components-swift" */;
 			productName = ElevenLabsComponents;
+		};
+		91FF89232EBA93EC0044C3D5 /* ElevenLabs */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 91FF89222EBA93EC0044C3D5 /* XCRemoteSwiftPackageReference "elevenlabs-swift-sdk" */;
+			productName = ElevenLabs;
 		};
 		ACAEBA682DE6EF4B0072E93E /* LiveKit */ = {
 			isa = XCSwiftPackageProductDependency;

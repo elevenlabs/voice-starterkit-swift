@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/livekit/client-sdk-swift.git",
       "state" : {
-        "revision" : "d0294781fe01ff47842e152a984533384e753a9d",
-        "version" : "2.6.1"
+        "revision" : "dbe9ba67ae033d2961a7aa675afbee121c313fe8",
+        "version" : "2.10.0"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/elevenlabs/components-swift.git",
       "state" : {
         "branch" : "main",
-        "revision" : "a02496b8d1ce71ffa2c2bf7a8737eee51a3289ec"
+        "revision" : "8762e8d81238701fd4cebde4ba8369bb6f3894fe"
       }
     },
     {
@@ -24,8 +24,26 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/elevenlabs/elevenlabs-swift-sdk.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "08fdb9b674a8823677cc61f1552be56798336038"
+        "revision" : "7e87e09aed65d4f69394a0d4346d158a30fb0c18",
+        "version" : "2.1.0-alpha.2"
+      }
+    },
+    {
+      "identity" : "jwt-kit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vapor/jwt-kit.git",
+      "state" : {
+        "revision" : "13e7513b3ba0afa13967daf77af2fb4ad087306c",
+        "version" : "4.13.5"
+      }
+    },
+    {
+      "identity" : "swift-asn1",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-asn1.git",
+      "state" : {
+        "revision" : "40d25bbb2fc5b557a9aa8512210bded327c0f60d",
+        "version" : "1.5.0"
       }
     },
     {
@@ -47,6 +65,15 @@
       }
     },
     {
+      "identity" : "swift-crypto",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-crypto.git",
+      "state" : {
+        "revision" : "95ba0316a9b733e92bb6b071255ff46263bbe7dc",
+        "version" : "3.15.1"
+      }
+    },
+    {
       "identity" : "swift-log",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-log.git",
@@ -60,8 +87,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",
       "state" : {
-        "revision" : "102a647b573f60f73afdce5613a51d71349fe507",
-        "version" : "1.30.0"
+        "revision" : "c169a5744230951031770e27e475ff6eefe51f9d",
+        "version" : "1.33.3"
       }
     },
     {
@@ -69,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/livekit/webrtc-xcframework.git",
       "state" : {
-        "revision" : "5e93f981d3af01addbd5c4998e58bd7441c9ae95",
-        "version" : "125.6422.32"
+        "revision" : "5b40f56c637369064b9c82e8f9cfa820f942658f",
+        "version" : "137.7151.10"
       }
     }
   ],

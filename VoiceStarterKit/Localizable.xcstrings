@@ -1,6 +1,15 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "" : {
+
+    },
+    "0" : {
+
+    },
+    "1" : {
+
+    },
     "Accept" : {
 
     },
@@ -14,6 +23,15 @@
           }
         }
       }
+    },
+    "Attempts: %lld" : {
+
+    },
+    "Audio Controls" : {
+
+    },
+    "Bypass Voice Processing" : {
+
     },
     "connect.connecting" : {
       "extractionState" : "manual",
@@ -48,7 +66,13 @@
         }
       }
     },
+    "Current: %@" : {
+
+    },
     "Decline" : {
+
+    },
+    "Enable AGC" : {
 
     },
     "error.ok" : {
@@ -71,6 +95,12 @@
         }
       }
     },
+    "Event Log" : {
+
+    },
+    "Keep Mic Warm" : {
+
+    },
     "message.placeholder" : {
       "localizations" : {
         "en" : {
@@ -80,6 +110,27 @@
           }
         }
       }
+    },
+    "Mic Volume" : {
+
+    },
+    "Mute Mode" : {
+
+    },
+    "No events yet." : {
+
+    },
+    "SDK Diagnostics" : {
+
+    },
+    "Startup Diagnostics" : {
+
+    },
+    "State: %@" : {
+
+    },
+    "Waiting for metrics…" : {
+
     },
     "warning.reconnecting" : {
       "extractionState" : "manual",
