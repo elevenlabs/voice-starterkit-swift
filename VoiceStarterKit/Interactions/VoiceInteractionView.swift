@@ -197,19 +197,27 @@ private struct AudioSettingsCard: View {
                 Text("1")
                     .font(.caption2)
             }
-            .onChange(of: viewModel.micVolume) { _ in viewModel.applyAudioSettings() }
+            .onChange(of: viewModel.micVolume) { _, _ in
+                Task { await viewModel.applyAudioSettings() }
+            }
             Text("Current: \(String(format: "%.2f", viewModel.micVolume))")
                 .font(.caption2)
                 .foregroundStyle(.fg3)
 
             Toggle("Bypass Voice Processing", isOn: $viewModel.voiceProcessingBypassed)
-                .onChange(of: viewModel.voiceProcessingBypassed) { _ in viewModel.applyAudioSettings() }
+                .onChange(of: viewModel.voiceProcessingBypassed) { _, _ in
+                    Task { await viewModel.applyAudioSettings() }
+                }
 
             Toggle("Enable AGC", isOn: $viewModel.agcEnabled)
-                .onChange(of: viewModel.agcEnabled) { _ in viewModel.applyAudioSettings() }
+                .onChange(of: viewModel.agcEnabled) { _, _ in
+                    Task { await viewModel.applyAudioSettings() }
+                }
 
             Toggle("Keep Mic Warm", isOn: $viewModel.recordingAlwaysPrepared)
-                .onChange(of: viewModel.recordingAlwaysPrepared) { _ in viewModel.applyAudioSettings() }
+                .onChange(of: viewModel.recordingAlwaysPrepared) { _, _ in
+                    Task { await viewModel.applyAudioSettings() }
+                }
 
             Picker("Mute Mode", selection: $viewModel.microphoneMuteMode) {
                 ForEach(modes, id: \.self) { mode in
@@ -217,8 +225,8 @@ private struct AudioSettingsCard: View {
                 }
             }
             .pickerStyle(.segmented)
-            .onChange(of: viewModel.microphoneMuteMode) { mode in
-                viewModel.setMicrophoneMode(mode)
+            .onChange(of: viewModel.microphoneMuteMode) { _, newValue in
+                Task { await viewModel.setMicrophoneMode(newValue) }
             }
         }
         .font(.caption)

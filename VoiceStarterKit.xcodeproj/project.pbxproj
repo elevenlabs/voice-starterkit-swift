@@ -736,7 +736,7 @@
 			repositoryURL = "https://github.com/elevenlabs/elevenlabs-swift-sdk.git";
 			requirement = {
 				kind = exactVersion;
-				version = "2.1.0-alpha.1";
+				version = "2.1.0-alpha.2";
 			};
 		};
 		ACBC17782D8C34B5007EE71F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */ = {

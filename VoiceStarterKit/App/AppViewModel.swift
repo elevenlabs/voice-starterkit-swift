@@ -18,7 +18,7 @@ final class AppViewModel: ObservableObject {
     // MARK: - Constants
 
     private enum Constants {
-        static let publicAgentId: String = "agent_7601k95fk7q2eyfbp4bncp5znp6x"
+        static let publicAgentId: String = "<insert-agent-id-here>"
     }
 
     // MARK: - Modes
@@ -212,7 +212,7 @@ final class AppViewModel: ObservableObject {
                 }
                 .store(in: &cancellables)
 
-            applyAudioSettings()
+            await applyAudioSettings()
         } catch {
             errorHandler(error)
             log("Connection failed: \(error.localizedDescription)")
@@ -233,19 +233,34 @@ final class AppViewModel: ObservableObject {
 
     // MARK: - Diagnostics
 
-    func applyAudioSettings() {
-        let audioManager = AudioManager.shared
-        audioManager.mixer.micVolume = Float(micVolume)
-        audioManager.isVoiceProcessingBypassed = voiceProcessingBypassed
-        audioManager.isVoiceProcessingAGCEnabled = agcEnabled
-        try? audioManager.setRecordingAlwaysPreparedMode(recordingAlwaysPrepared)
-        try? audioManager.set(microphoneMuteMode: microphoneMuteMode)
+    func applyAudioSettings() async {
+        // Perform immediate, synchronous updates on the main actor without awaiting
+        let micVolume = self.micVolume
+        let voiceProcessingBypassed = self.voiceProcessingBypassed
+        let agcEnabled = self.agcEnabled
+        let recordingAlwaysPrepared = self.recordingAlwaysPrepared
+        let microphoneMuteMode = self.microphoneMuteMode
+
+        // Apply non-suspending property updates first
+        do {
+            let audioManager = AudioManager.shared
+            audioManager.mixer.micVolume = Float(micVolume)
+            audioManager.isVoiceProcessingBypassed = voiceProcessingBypassed
+            audioManager.isVoiceProcessingAGCEnabled = agcEnabled
+        }
+
+        // Reacquire the singleton across suspension boundaries to avoid sending a non-Sendable reference
+        do {
+            try? await AudioManager.shared.setRecordingAlwaysPreparedMode(recordingAlwaysPrepared)
+            try? AudioManager.shared.set(microphoneMuteMode: microphoneMuteMode)
+        }
+
         log("Audio settings updated: micVolume=\(String(format: "%.2f", micVolume)), bypass=\(voiceProcessingBypassed), AGC=\(agcEnabled), prepared=\(recordingAlwaysPrepared), muteMode=\(String(describing: microphoneMuteMode))")
     }
 
-    func setMicrophoneMode(_ mode: MicrophoneMuteMode) {
+    func setMicrophoneMode(_ mode: MicrophoneMuteMode) async {
         microphoneMuteMode = mode
-        applyAudioSettings()
+        await applyAudioSettings()
     }
 
     func log(_ message: String) {
@@ -503,3 +518,4 @@ final class AppViewModel: ObservableObject {
         )
     }
 }
+

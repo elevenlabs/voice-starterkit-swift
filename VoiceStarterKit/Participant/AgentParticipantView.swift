@@ -15,7 +15,7 @@ struct AgentParticipantView: View {
             if let agentAudioTrack = viewModel.agentAudioTrack {
                 OrbVisualizer(inputTrack: agentAudioTrack,
                               outputTrack: agentAudioTrack,
-                              agentState: viewModel.conversation?.agentState ?? .listening)
+                              agentState: .listening)
                     .frame(maxWidth: 50 * .grid, maxHeight: 50 * .grid)
                     .transition(.opacity)
             } else if viewModel.isInteractive {
