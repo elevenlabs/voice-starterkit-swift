@@ -25,7 +25,7 @@ struct BlurredTop: ViewModifier {
 }
 
 /// A view modifier that creates a shimmering effect.
-struct Shimerring: ViewModifier {
+struct Shimmering: ViewModifier {
     @State private var isShimmering = false
 
     func body(content: Content) -> some View {
@@ -62,6 +62,6 @@ extension View {
 
     /// Creates a shimmering effect.
     func shimmering() -> some View {
-        modifier(Shimerring())
+        modifier(Shimmering())
     }
 }
